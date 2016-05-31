@@ -16,7 +16,7 @@ function asyncValidate(data, dispatch, {isValidEmail}) {
 )
 @reduxForm({
   form: 'survey',
-  fields: ['name', 'email', 'occupation', 'currentlyEmployed', 'sex'],
+  fields: ['city', 'startDate', 'endDate', 'email', 'occupation', 'currentlyEmployed', 'sex'],
   validate: surveyValidation,
   asyncValidate,
   asyncBlurFields: ['email']
@@ -39,7 +39,7 @@ class SurveyForm extends Component {
     const {
       asyncValidating,
       dirty,
-      fields: {name, email, occupation, currentlyEmployed, sex},
+      fields: {city, startDate, endDate, email, occupation, currentlyEmployed, sex},
       active,
       handleSubmit,
       invalid,
@@ -50,10 +50,10 @@ class SurveyForm extends Component {
     const styles = require('./SurveyForm.scss');
     const renderInput = (field, label, showAsyncValidating) =>
       <div className={'form-group' + (field.error && field.touched ? ' has-error' : '')}>
-        <label htmlFor={field.name} className="col-sm-2">{label}</label>
+        <label htmlFor={field.city} className="col-sm-2">{label}</label>
         <div className={'col-sm-8 ' + styles.inputGroup}>
           {showAsyncValidating && asyncValidating && <i className={'fa fa-cog fa-spin ' + styles.cog}/>}
-          <input type="text" className="form-control" id={field.name} {...field}/>
+          <input type="text" className="form-control" id={field.city} {...field}/>
           {field.error && field.touched && <div className="text-danger">{field.error}</div>}
           <div className={styles.flags}>
             {field.dirty && <span className={styles.dirty} title="Dirty">D</span>}
@@ -67,7 +67,9 @@ class SurveyForm extends Component {
     return (
       <div>
         <form className="form-horizontal" onSubmit={handleSubmit}>
-          {renderInput(name, 'Full Name')}
+          {renderInput(city, 'Enter a City')}
+          {renderInput(startDate, 'Start Date')}
+          {renderInput(endDate, 'End Date')}
           {renderInput(email, 'Email', true)}
           {renderInput(occupation, 'Occupation')}
           <div className="form-group">
