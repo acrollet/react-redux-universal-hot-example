@@ -5,7 +5,7 @@ const surveyValidation = createValidator({
   city: [required],
   startDate: [required],
   endDate: [required],
-  email: [required, email],
+  email: [email],
   occupation: maxLength(20) // single rules don't have to be in an array
 });
 export default memoize(10)(surveyValidation);
